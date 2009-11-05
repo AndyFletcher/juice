@@ -2,28 +2,7 @@ let test = require('test'),
     asserts = test.asserts,
     Validation = require('juice/validation').Validation;
 
-// simple wrapper for testing throws
-asserts.throws = function( testcase, expected, message ) {
-  if ( message == undefined ) {
-    message = expected;
-    expected = undefined;
-  }
-  try {
-    testcase();
-    asserts.ok( 0, message );
-    asserts.diag( "No error thrown" );
-  }
-  catch ( e ) {
-    if ( expected === undefined || expected == e.toString() ) {
-      asserts.ok( 1, message );
-    }
-    else {
-      asserts.ok( 0, message );
-      asserts.diag( "   Got: " + e.toString() );
-      asserts.diag( "Wanted: " + expected );
-    }
-  }
-}
+asserts.throws = require( 'tests/helpers' ).throws;
 
 if (!this.exports) this.exports = {};
 
